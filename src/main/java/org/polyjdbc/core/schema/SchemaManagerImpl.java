@@ -19,18 +19,17 @@ import org.polyjdbc.core.exception.SchemaManagerException;
 import org.polyjdbc.core.schema.model.Schema;
 import org.polyjdbc.core.schema.model.SchemaEntity;
 import org.polyjdbc.core.transaction.Transaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 class SchemaManagerImpl implements SchemaManager {
 
-    private static final Logger logger = LoggerFactory.getLogger(SchemaManagerImpl.class);
+    private static final Logger logger = Logger.getLogger("SchemaManagerImpl");
 
     private final Transaction transaction;
 
@@ -48,7 +47,7 @@ class SchemaManagerImpl implements SchemaManager {
         String ddlText;
         for (SchemaEntity entity : entitiesToCreate) {
             ddlText = entity.ddl();
-            logger.info("creating entity with name {} using ddl:\n{}", entity.getName(), ddlText);
+            logger.info(String.format("Creating entity with name %s using ddl:\n%s", entity.getName(), ddlText));
             ddl(DDLQuery.ddl(ddlText));
         }
     }
@@ -70,7 +69,7 @@ class SchemaManagerImpl implements SchemaManager {
         String ddlText;
         for (SchemaEntity entity : entitiesToDrop) {
             ddlText = entity.dropDDL();
-            logger.info("dropping entity with name {} using ddl:\n{}", entity.getName(), ddlText);
+            logger.info(String.format("Dropping entity with name %s using ddl:\n%s", entity.getName(), ddlText));
             ddl(DDLQuery.ddl(ddlText));
         }
     }

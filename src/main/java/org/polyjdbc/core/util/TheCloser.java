@@ -15,15 +15,15 @@
  */
 package org.polyjdbc.core.util;
 
+import org.polyjdbc.core.query.QueryRunner;
+
 import java.io.Closeable;
 import java.io.IOException;
-import org.polyjdbc.core.query.QueryRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
 
 public final class TheCloser {
 
-    private static final Logger logger = LoggerFactory.getLogger(TheCloser.class);
+    private static final Logger logger = Logger.getLogger(TheCloser.class.getName());
 
     private TheCloser() {
     }
@@ -36,7 +36,8 @@ public final class TheCloser {
                 }
             }
         } catch (IOException exception) {
-            logger.warn("Failed to close resource", exception);
+            logger.warning("Failed to close resource");
+            logger.throwing(TheCloser.class.getName(), "close", exception);
         }
     }
 
