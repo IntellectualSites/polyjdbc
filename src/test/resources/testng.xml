@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
-<suite name="unit">
-    <test name="all">
-        <packages>
-            <package name="org.polyjdbc.core.*"/>
-        </packages>
-    </test>
-</suite>
